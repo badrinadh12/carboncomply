@@ -1,3 +1,14 @@
+## Hackathon Details
+
+Portal        https://hackathon.azisly.ai/login  
+Email         badrinadhgoru@gmail.com  
+Hackathon ID  AZIS-NRKU3X  
+Team          Badrinadh's Team  
+College       JK Lakshmipat University  
+Track         Track 2: Real-World AI Products  
+Product       CarbonComply  
+Website       https://carboncomply.vercel.app/dashboard
+
 # CARBONCOMPLY
 > **Track. Reduce. Comply.**
 
