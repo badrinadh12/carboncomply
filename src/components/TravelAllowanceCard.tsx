@@ -3,7 +3,7 @@
 import React from 'react';
 import { formatCo2 } from '@/lib/calculations';
 import { MonthlyTravelAllowance } from '@/lib/types';
-import { Plane, AlertTriangle, CheckCircle, Info } from 'lucide-react';
+import { Plane, Info } from 'lucide-react';
 
 interface TravelAllowanceCardProps {
   allowance: MonthlyTravelAllowance;
@@ -22,78 +22,61 @@ export default function TravelAllowanceCard({ allowance }: TravelAllowanceCardPr
   const visualPercent = Math.min(100, Math.max(0, percentageUsed));
 
   return (
-    <div className="gov-card p-6 border border-slate-200 bg-white">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+    <div className="gov-card p-6 bg-white border border-slate-200/90 rounded-2xl flex flex-col justify-between space-y-4">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-100">
         <div className="flex items-center space-x-2.5">
-          <div className="w-8 h-8 rounded-lg bg-violet-100 text-violet-800 flex items-center justify-center">
-            <Plane className="w-5 h-5" />
+          <div className="w-8 h-8 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center border border-purple-100">
+            <Plane className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-slate-900">Fair Travel Allowance (Monthly)</h3>
-            <p className="text-xs text-slate-500">Commercial Flight Travel Quarantine ({monthLabel})</p>
+            <h3 className="text-sm font-bold text-slate-900">Monthly Travel Allowance</h3>
+            <p className="text-xs text-slate-500">{monthLabel} Flight Quota</p>
           </div>
         </div>
 
         <span
-          className={`text-xs font-bold px-2.5 py-1 rounded-full border self-start sm:self-center ${
+          className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
             isExceeded
-              ? 'bg-rose-100 text-rose-800 border-rose-300'
-              : 'bg-violet-100 text-violet-800 border-violet-200'
+              ? 'bg-rose-50 text-rose-700 border-rose-200'
+              : 'bg-purple-50 text-purple-700 border-purple-200/70'
           }`}
         >
-          {isExceeded ? 'Monthly Travel Allowance Exceeded' : 'Fair Allowance Active'}
+          {isExceeded ? 'Allowance Exceeded' : 'Fair Mobility'}
         </span>
       </div>
 
-      {/* Numerical overview */}
-      <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center sm:text-left">
-        <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
-          <span className="text-[11px] font-medium text-slate-500 block">Flight CO₂ This Month</span>
-          <span className="text-xl font-bold text-slate-900">{formatCo2(travelCo2)} kg</span>
-          <span className="text-[10px] text-slate-500 block">Logged air travel</span>
+      <div>
+        <div className="text-2xl font-bold text-slate-900">
+          {formatCo2(travelCo2)}{' '}
+          <span className="text-xs font-normal text-slate-500">/ {allowanceLimit} kg</span>
         </div>
-
-        <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
-          <span className="text-[11px] font-medium text-slate-500 block">Monthly Allowance</span>
-          <span className="text-xl font-bold text-violet-700">{formatCo2(allowanceLimit)} kg</span>
-          <span className="text-[10px] text-slate-500 block">200 kg statutory allowance</span>
-        </div>
-
-        <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
-          <span className="text-[11px] font-medium text-slate-500 block">Allowance Headroom</span>
-          <span className={`text-xl font-bold ${isExceeded ? 'text-rose-600' : 'text-slate-900'}`}>
-            {isExceeded ? '0.00' : formatCo2(remaining)} kg
-          </span>
-          <span className="text-[10px] text-slate-500 block">
-            {isExceeded ? 'Exceeded' : 'Available for flights'}
-          </span>
-        </div>
+        <p className="text-xs text-slate-500 mt-0.5">
+          {percentageUsed}% used • {isExceeded ? (
+            <span className="text-rose-700 font-semibold">{formatCo2(travelCo2 - allowanceLimit)} kg over limit</span>
+          ) : (
+            <span>{formatCo2(remaining)} kg remaining</span>
+          )}
+        </p>
       </div>
 
-      {/* Progress Bar */}
-      <div className="mt-4">
-        <div className="flex items-center justify-between text-xs text-slate-600 font-medium mb-1.5">
-          <span>Usage: {percentageUsed}% of 200 kg</span>
-          <span>{formatCo2(travelCo2)} / {formatCo2(allowanceLimit)} kg</span>
-        </div>
-        <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+      {/* Elegant Progress Bar */}
+      <div className="space-y-1.5">
+        <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
           <div
             className={`h-full transition-all duration-500 ease-out ${
-              isExceeded ? 'bg-rose-500' : 'bg-violet-600'
+              isExceeded ? 'bg-rose-500' : 'bg-purple-500'
             }`}
             style={{ width: `${visualPercent}%` }}
           />
         </div>
       </div>
 
-      {/* Policy Explanation Note */}
-      <div className="mt-4 p-3 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1.5">
-        <div className="flex items-start space-x-2">
-          <Info className="w-4 h-4 text-violet-600 shrink-0 mt-0.5" />
-          <p className="text-[11px] leading-relaxed">
-            <strong>Fairness Policy:</strong> Flight emissions are <strong>not exempt</strong> and remain fully calculated as part of your total weekly footprint. The separate monthly 200 kg travel allowance ensures essential long-distance travel is tracked fairly without penalizing necessary mobility.
-          </p>
-        </div>
+      {/* Gentle educational context */}
+      <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 text-[11px] text-slate-500 flex items-start space-x-2">
+        <Info className="w-3.5 h-3.5 text-purple-600 shrink-0 mt-0.5" />
+        <p className="leading-relaxed">
+          Travel emissions are included in your total footprint but tracked separately under the monthly travel allowance.
+        </p>
       </div>
     </div>
   );

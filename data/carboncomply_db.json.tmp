@@ -69,6 +69,16 @@
       "activity_date": "2026-09-15",
       "id": "act_1789462779086_p9thf70",
       "created_at": "2026-09-15T08:59:39.086Z"
+    },
+    {
+      "activity_type": "veg_meal",
+      "quantity": 4,
+      "unit": "meals",
+      "emission_factor": 0.5,
+      "co2_kg": 2,
+      "activity_date": "2026-09-15",
+      "id": "act_1789462779090_4lwtvr0",
+      "created_at": "2026-09-15T08:59:39.090Z"
     }
   ],
   "settings": {
