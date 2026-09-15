@@ -51,40 +51,40 @@ export default function SummaryCards({
 
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-      {/* CARD 1: Personal Target (Green Accent) */}
-      <div className="gov-card p-5 bg-white border border-slate-200/90 rounded-2xl flex flex-col justify-between space-y-3">
+      {/* CARD 1: Personal Target (Green/Teal Accent) */}
+      <div className="gov-card p-5 bg-white border border-[#E1E8D5] rounded-2xl flex flex-col justify-between space-y-3.5 shadow-xs">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center space-x-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+          <span className="text-xs font-semibold text-[#526579] uppercase tracking-wider flex items-center space-x-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#0F6E56]" />
             <span>Personal Target</span>
           </span>
-          <Target className="w-4 h-4 text-emerald-600" />
+          <Target className="w-4 h-4 text-[#0F6E56]" />
         </div>
 
         <div>
-          <div className="text-2xl font-bold text-slate-900">
+          <div className="text-2xl font-bold text-[#16324F]">
             {formatCo2(personalTarget)}{' '}
-            <span className="text-xs font-normal text-slate-500">kg / week</span>
+            <span className="text-xs font-normal text-[#526579]">kg / week</span>
           </div>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-[#526579] mt-0.5 font-medium">
             {totalCo2 > personalTarget ? (
-              <span className="text-amber-700 font-medium">{formatCo2(personalOver)} kg over goal</span>
+              <span className="text-[#854D0E] font-semibold">{formatCo2(personalOver)} kg over goal</span>
             ) : (
               <span>{formatCo2(personalRemaining)} kg remaining</span>
             )}
           </p>
         </div>
 
-        {/* Compact Progress Bar */}
+        {/* Compact Progress Bar with percentage aligned right */}
         <div className="space-y-1.5 pt-1">
-          <div className="flex justify-between text-[11px] text-slate-500 font-medium">
-            <span>{personalPercent}% used</span>
+          <div className="flex justify-between text-[11px] font-semibold text-[#526579]">
             <span>{formatCo2(totalCo2)} / {formatCo2(personalTarget)} kg</span>
+            <span className="text-[#16324F]">{personalPercent}% used</span>
           </div>
-          <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div className="w-full h-2.5 bg-[#E9EFE0] rounded-full overflow-hidden">
             <div
-              className={`h-full transition-all duration-500 ${
-                totalCo2 > personalTarget ? 'bg-amber-500' : 'bg-emerald-500'
+              className={`h-full transition-all duration-500 rounded-full ${
+                totalCo2 > personalTarget ? 'bg-[#D97706]' : 'bg-[#0F6E56]'
               }`}
               style={{ width: `${personalBarFill}%` }}
             />
@@ -93,25 +93,25 @@ export default function SummaryCards({
       </div>
 
       {/* CARD 2: Government Threshold (Blue/Teal Accent, Fixed) */}
-      <div className="gov-card p-5 bg-white border border-slate-200/90 rounded-2xl flex flex-col justify-between space-y-3">
+      <div className="gov-card p-5 bg-white border border-[#E1E8D5] rounded-2xl flex flex-col justify-between space-y-3.5 shadow-xs">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center space-x-1.5">
-            <span className="w-2 h-2 rounded-full bg-teal-500" />
+          <span className="text-xs font-semibold text-[#526579] uppercase tracking-wider flex items-center space-x-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#0284C7]" />
             <span>Gov Threshold</span>
           </span>
-          <span className="text-[10px] font-bold bg-teal-50 text-teal-700 border border-teal-200/60 px-1.5 py-0.2 rounded">
+          <span className="text-[10px] font-bold bg-[#E0F2FE] text-[#0369A1] border border-[#BAE6FD] px-1.5 py-0.2 rounded">
             Fixed
           </span>
         </div>
 
         <div>
-          <div className="text-2xl font-bold text-slate-900">
+          <div className="text-2xl font-bold text-[#16324F]">
             {formatCo2(governmentThreshold)}{' '}
-            <span className="text-xs font-normal text-slate-500">kg / week</span>
+            <span className="text-xs font-normal text-[#526579]">kg / week</span>
           </div>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-[#526579] mt-0.5 font-medium">
             {isExceeded ? (
-              <span className="text-rose-700 font-medium">{formatCo2(govOver)} kg over limit</span>
+              <span className="text-[#9F1239] font-semibold">{formatCo2(govOver)} kg over limit</span>
             ) : (
               <span>{formatCo2(govRemaining)} kg remaining</span>
             )}
@@ -120,20 +120,20 @@ export default function SummaryCards({
 
         {/* Compact Progress Bar */}
         <div className="space-y-1.5 pt-1">
-          <div className="flex justify-between text-[11px] text-slate-500 font-medium">
-            <span>{govPercent}% used</span>
+          <div className="flex justify-between text-[11px] font-semibold text-[#526579]">
             <span>{formatCo2(totalCo2)} / {formatCo2(governmentThreshold)} kg</span>
+            <span className="text-[#16324F]">{govPercent}% used</span>
           </div>
-          <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div className="w-full h-2.5 bg-[#E9EFE0] rounded-full overflow-hidden">
             <div
-              className={`h-full transition-all duration-500 ${
+              className={`h-full transition-all duration-500 rounded-full ${
                 isExceeded
-                  ? 'bg-rose-500'
+                  ? 'bg-[#E11D48]'
                   : govPercent >= 90
-                  ? 'bg-orange-500'
+                  ? 'bg-[#EA580C]'
                   : govPercent >= 70
-                  ? 'bg-amber-500'
-                  : 'bg-teal-600'
+                  ? 'bg-[#D97706]'
+                  : 'bg-[#0284C7]'
               }`}
               style={{ width: `${govBarFill}%` }}
             />
@@ -142,35 +142,35 @@ export default function SummaryCards({
       </div>
 
       {/* CARD 3: Travel Allowance (Soft Purple Accent) */}
-      <div className="gov-card p-5 bg-white border border-slate-200/90 rounded-2xl flex flex-col justify-between space-y-3">
+      <div className="gov-card p-5 bg-white border border-[#E1E8D5] rounded-2xl flex flex-col justify-between space-y-3.5 shadow-xs">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center space-x-1.5">
-            <span className="w-2 h-2 rounded-full bg-purple-500" />
+          <span className="text-xs font-semibold text-[#526579] uppercase tracking-wider flex items-center space-x-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#7C3AED]" />
             <span>Travel Allowance</span>
           </span>
-          <Plane className="w-4 h-4 text-purple-600" />
+          <Plane className="w-4 h-4 text-[#7C3AED]" />
         </div>
 
         <div>
-          <div className="text-2xl font-bold text-slate-900">
+          <div className="text-2xl font-bold text-[#16324F]">
             {formatCo2(travelCo2)}{' '}
-            <span className="text-xs font-normal text-slate-500">/ {travelLimit} kg</span>
+            <span className="text-xs font-normal text-[#526579]">/ {travelLimit} kg</span>
           </div>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-[#526579] mt-0.5 font-medium">
             This month • {formatCo2(travelRemaining)} kg remaining
           </p>
         </div>
 
         {/* Compact Progress Bar */}
         <div className="space-y-1.5 pt-1">
-          <div className="flex justify-between text-[11px] text-slate-500 font-medium">
-            <span>{travelPercent}% used</span>
+          <div className="flex justify-between text-[11px] font-semibold text-[#526579]">
             <span>{travelAllowance?.isExceeded ? 'Exceeded' : 'Fair mobility'}</span>
+            <span className="text-[#16324F]">{travelPercent}% used</span>
           </div>
-          <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div className="w-full h-2.5 bg-[#E9EFE0] rounded-full overflow-hidden">
             <div
-              className={`h-full transition-all duration-500 ${
-                travelAllowance?.isExceeded ? 'bg-rose-500' : 'bg-purple-500'
+              className={`h-full transition-all duration-500 rounded-full ${
+                travelAllowance?.isExceeded ? 'bg-[#E11D48]' : 'bg-[#7C3AED]'
               }`}
               style={{ width: `${travelBarFill}%` }}
             />
@@ -178,27 +178,27 @@ export default function SummaryCards({
         </div>
       </div>
 
-      {/* CARD 4: Compliance Status (Subtle Green or Soft Rose Warning, NEVER harsh red block!) */}
+      {/* CARD 4: Compliance Status (Subtle Tint, Never Harsh Red Block) */}
       <div
-        className={`gov-card p-5 rounded-2xl flex flex-col justify-between space-y-3 ${
+        className={`gov-card p-5 rounded-2xl flex flex-col justify-between space-y-3.5 shadow-xs ${
           isExceeded
-            ? 'bg-rose-50/40 border border-rose-200/70'
-            : 'bg-white border border-slate-200/90'
+            ? 'bg-[#FFF5F5] border border-[#FECDD3]'
+            : 'bg-white border border-[#E1E8D5]'
         }`}
       >
         <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center space-x-1.5">
+          <span className="text-xs font-semibold text-[#526579] uppercase tracking-wider flex items-center space-x-1.5">
             <span
               className={`w-2 h-2 rounded-full ${
-                isExceeded ? 'bg-rose-500' : 'bg-emerald-500'
+                isExceeded ? 'bg-[#E11D48]' : 'bg-[#0F6E56]'
               }`}
             />
             <span>Compliance Status</span>
           </span>
           {isExceeded ? (
-            <AlertTriangle className="w-4 h-4 text-rose-600" />
+            <AlertTriangle className="w-4 h-4 text-[#E11D48]" />
           ) : (
-            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <CheckCircle2 className="w-4 h-4 text-[#0F6E56]" />
           )}
         </div>
 
@@ -206,23 +206,23 @@ export default function SummaryCards({
           <div className="flex items-center space-x-2">
             <span
               className={`text-xl font-bold ${
-                isExceeded ? 'text-rose-800' : 'text-slate-900'
+                isExceeded ? 'text-[#9F1239]' : 'text-[#16324F]'
               }`}
             >
               {isExceeded ? 'Limit Exceeded' : 'Compliant'}
             </span>
           </div>
-          <div className="text-sm font-semibold text-slate-800 mt-0.5">
-            Fee: <span className={feeAmount > 0 ? 'text-rose-700 font-bold' : 'text-emerald-700 font-bold'}>₹{feeAmount}</span>
+          <div className="text-sm font-semibold text-[#16324F] mt-0.5">
+            Fee: <span className={feeAmount > 0 ? 'text-[#9F1239] font-bold' : 'text-[#0F6E56] font-bold'}>₹{feeAmount}</span>
           </div>
         </div>
 
         <div className="pt-1">
-          <p className="text-[11px] text-slate-500 leading-snug">
+          <p className="text-[11px] text-[#526579] leading-snug font-medium">
             {isExceeded
               ? isFirstViolation
-                ? 'First threshold violation — reminder issued.'
-                : 'Subsequent violation — ₹10 fee applies.'
+                ? 'First violation — reminder issued (₹0).'
+                : 'Subsequent violation — ₹10 fee applied.'
               : 'Within statutory threshold. No action required.'}
           </p>
         </div>

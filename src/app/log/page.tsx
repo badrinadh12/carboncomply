@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import { ActivityType, ActivityDefinition } from '@/lib/types';
 import { ACTIVITY_DEFINITIONS, calculateCo2, formatCo2, isAbsurdValue } from '@/lib/calculations';
 import { getTodayDateString, formatDisplayDate } from '@/lib/dateUtils';
+import { getAppEffectiveDate } from '@/lib/demoDate';
 import { evaluateAndTriggerThresholdAlert } from '@/lib/notificationTracker';
 import AbsurdInputDialog from '@/components/AbsurdInputDialog';
 import Link from 'next/link';
@@ -16,11 +17,9 @@ import {
   Zap,
   Utensils,
   Bus,
-  Calendar,
   AlertCircle,
   CheckCircle2,
   ArrowLeft,
-  Sparkles,
 } from 'lucide-react';
 
 export default function LogActivityPage() {
@@ -32,6 +31,10 @@ export default function LogActivityPage() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [showAbsurdDialog, setShowAbsurdDialog] = useState(false);
+
+  React.useEffect(() => {
+    setActivityDate(getAppEffectiveDate());
+  }, []);
 
   const currentDef: ActivityDefinition = ACTIVITY_DEFINITIONS[selectedType];
   const numQuantity = parseFloat(quantity) || 0;
@@ -83,7 +86,7 @@ export default function LogActivityPage() {
         throw new Error(data.error || 'Failed to record activity.');
       }
 
-      // Check if this newly pushed the week over 100 kg to trigger notification sound
+      // Check if threshold was newly crossed
       try {
         const compRes = await fetch('/api/compliance');
         const compData = await compRes.json();
@@ -103,7 +106,7 @@ export default function LogActivityPage() {
       setQuantity('');
       setTimeout(() => {
         router.push('/dashboard');
-      }, 1000);
+      }, 900);
     } catch (err: any) {
       setErrorMessage(err.message || 'Error occurred while saving.');
     } finally {
@@ -130,35 +133,37 @@ export default function LogActivityPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50">
+    <div className="min-h-screen flex flex-col bg-sage-canvas">
       <Header />
 
       <main className="flex-1 max-w-2xl w-full mx-auto px-4 sm:px-6 py-8">
         <div className="mb-6">
           <Link
             href="/dashboard"
-            className="inline-flex items-center space-x-1.5 text-xs font-semibold text-slate-500 hover:text-slate-800 transition mb-3"
+            className="inline-flex items-center space-x-1.5 text-xs font-semibold text-[#526579] hover:text-[#16324F] transition mb-3"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Dashboard</span>
           </Link>
-          <h1 className="text-2xl font-bold text-slate-900">Log Carbon Activity</h1>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#16324F] tracking-tight">
+            Log Carbon Activity
+          </h1>
+          <p className="text-xs text-[#526579] mt-0.5">
             Select activity, enter quantity, and record toward your Monday–Sunday compliance cycle.
           </p>
         </div>
 
-        {/* Clean Centered Form Card */}
-        <div className="gov-card p-6 sm:p-8 bg-white border border-slate-200/90 rounded-2xl shadow-xs">
+        {/* Clean Centered White Card */}
+        <div className="gov-card p-6 sm:p-8 bg-white border border-[#E1E8D5] rounded-2xl shadow-xs">
           <form onSubmit={handleFormSubmit} className="space-y-6">
             {errorMessage && (
-              <div className="p-3.5 bg-rose-50 border border-rose-200/80 rounded-xl flex items-start space-x-2.5 text-xs text-rose-800">
+              <div className="p-3.5 bg-[#FFF5F5] border border-[#FECDD3] rounded-xl flex items-start space-x-2.5 text-xs text-[#9F1239]">
                 <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                 <span>{errorMessage}</span>
               </div>
             )}
             {successMessage && (
-              <div className="p-3.5 bg-emerald-50 border border-emerald-200/80 rounded-xl flex items-start space-x-2.5 text-xs text-emerald-800">
+              <div className="p-3.5 bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl flex items-start space-x-2.5 text-xs text-[#14532D]">
                 <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
                 <span>{successMessage}</span>
               </div>
@@ -166,7 +171,7 @@ export default function LogActivityPage() {
 
             {/* 1. Activity Type */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#16324F] mb-2.5">
                 Activity Type
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
@@ -181,14 +186,14 @@ export default function LogActivityPage() {
                       onClick={() => handleTypeChange(type)}
                       className={`p-3 rounded-xl border text-left flex flex-col justify-between transition cursor-pointer ${
                         isSelected
-                          ? 'border-emerald-600 bg-emerald-50/70 text-emerald-950 font-semibold ring-1 ring-emerald-500 shadow-2xs'
-                          : 'border-slate-200/80 hover:border-slate-300 hover:bg-slate-50 text-slate-700'
+                          ? 'border-[#0F6E56] bg-[#EBF4E0] text-[#16324F] font-semibold ring-1 ring-[#0F6E56] shadow-2xs'
+                          : 'border-[#E1E8D5] hover:border-[#C9D6B8] hover:bg-[#F8FAF5] text-[#16324F]'
                       }`}
                     >
                       <div className="flex items-center justify-between w-full mb-1.5">
                         <Icon
                           className={`w-4 h-4 ${
-                            isSelected ? 'text-emerald-700' : 'text-slate-400'
+                            isSelected ? 'text-[#0F6E56]' : 'text-[#718096]'
                           }`}
                         />
                         {type === 'flight' && (
@@ -198,7 +203,7 @@ export default function LogActivityPage() {
                         )}
                       </div>
                       <span className="text-xs font-bold">{def.label}</span>
-                      <span className="text-[10px] text-slate-500 mt-0.5">
+                      <span className="text-[10px] text-[#526579] mt-0.5">
                         {def.emissionFactor.toFixed(2)} kg/{def.unit}
                       </span>
                     </button>
@@ -212,12 +217,12 @@ export default function LogActivityPage() {
               <div className="flex items-center justify-between mb-1.5">
                 <label
                   htmlFor="quantity-input"
-                  className="block text-xs font-bold uppercase tracking-wider text-slate-700"
+                  className="block text-xs font-bold uppercase tracking-wider text-[#16324F]"
                 >
                   Quantity
                 </label>
-                <span className="text-xs text-slate-500 font-medium">
-                  Unit: <strong className="text-slate-800">{currentDef.unit}</strong>
+                <span className="text-xs text-[#526579] font-medium">
+                  Unit: <strong className="text-[#16324F]">{currentDef.unit}</strong>
                 </span>
               </div>
               <div className="relative">
@@ -230,9 +235,9 @@ export default function LogActivityPage() {
                   placeholder={`e.g. 20 ${currentDef.unit}`}
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:outline-hidden font-medium"
+                  className="w-full px-4 py-2.5 bg-white border border-[#CBD5E1] rounded-xl text-sm text-[#16324F] focus:ring-2 focus:ring-[#0F6E56] focus:outline-hidden font-medium"
                 />
-                <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-xs font-semibold text-slate-400">
+                <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-xs font-semibold text-[#718096]">
                   {currentDef.unit}
                 </div>
               </div>
@@ -243,11 +248,11 @@ export default function LogActivityPage() {
               <div className="flex items-center justify-between mb-1.5">
                 <label
                   htmlFor="date-input"
-                  className="block text-xs font-bold uppercase tracking-wider text-slate-700"
+                  className="block text-xs font-bold uppercase tracking-wider text-[#16324F]"
                 >
                   Date
                 </label>
-                <span className="text-xs text-slate-500 font-medium">
+                <span className="text-xs text-[#526579] font-medium">
                   {formatDisplayDate(activityDate)}
                 </span>
               </div>
@@ -257,29 +262,29 @@ export default function LogActivityPage() {
                 required
                 value={activityDate}
                 onChange={(e) => setActivityDate(e.target.value)}
-                className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:outline-hidden font-medium"
+                className="w-full px-4 py-2.5 bg-white border border-[#CBD5E1] rounded-xl text-sm text-[#16324F] focus:ring-2 focus:ring-[#0F6E56] focus:outline-hidden font-medium"
               />
             </div>
 
             {/* Live Calculation Box */}
-            <div className="p-4 rounded-xl bg-slate-50/80 border border-slate-200/80 space-y-2 text-xs">
-              <div className="flex justify-between text-slate-600">
+            <div className="p-4 rounded-xl bg-[#F8FAF5] border border-[#E1E8D5] space-y-2 text-xs">
+              <div className="flex justify-between text-[#526579]">
                 <span>Emission Factor:</span>
-                <span className="font-semibold text-slate-800">
+                <span className="font-semibold text-[#16324F]">
                   {currentDef.emissionFactor.toFixed(2)} kg CO₂ / {currentDef.unit}
                 </span>
               </div>
-              <div className="flex justify-between text-slate-600">
+              <div className="flex justify-between text-[#526579]">
                 <span>Category:</span>
-                <span className="font-semibold text-slate-800 capitalize">
+                <span className="font-semibold text-[#16324F] capitalize">
                   {currentDef.categoryLabel}
                 </span>
               </div>
-              <div className="pt-2 border-t border-slate-200 flex justify-between items-center">
-                <span className="font-bold text-slate-700">Estimated CO₂:</span>
-                <span className="text-2xl font-extrabold text-emerald-800">
+              <div className="pt-2 border-t border-[#E1E8D5] flex justify-between items-center">
+                <span className="font-bold text-[#16324F]">Estimated CO₂:</span>
+                <span className="text-2xl font-extrabold text-[#0F6E56]">
                   {formatCo2(estimatedCo2)}{' '}
-                  <span className="text-xs font-normal text-slate-500">kg CO₂</span>
+                  <span className="text-xs font-normal text-[#526579]">kg CO₂</span>
                 </span>
               </div>
             </div>
@@ -288,7 +293,7 @@ export default function LogActivityPage() {
             <div className="pt-2 flex items-center justify-end space-x-3">
               <Link
                 href="/dashboard"
-                className="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition"
+                className="px-4 py-2 text-xs font-semibold text-[#526579] hover:bg-[#F8FAF5] rounded-xl transition"
               >
                 Cancel
               </Link>
@@ -296,7 +301,7 @@ export default function LogActivityPage() {
                 type="submit"
                 disabled={isSubmitting}
                 id="save-activity-btn"
-                className="px-6 py-2.5 bg-emerald-700 hover:bg-emerald-800 disabled:bg-slate-400 text-white rounded-xl text-xs font-bold shadow-xs transition flex items-center space-x-2 cursor-pointer"
+                className="px-6 py-2.5 bg-[#0F6E56] hover:bg-[#0A5C45] disabled:bg-[#CBD5E1] text-white rounded-xl text-xs font-bold shadow-xs transition flex items-center space-x-2 cursor-pointer"
               >
                 <PlusCircle className="w-4 h-4" />
                 <span>{isSubmitting ? 'Saving...' : 'Save Activity'}</span>

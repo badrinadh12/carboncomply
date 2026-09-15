@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { ActivityType, ActivityDefinition } from '@/lib/types';
 import { ACTIVITY_DEFINITIONS, calculateCo2, formatCo2, isAbsurdValue } from '@/lib/calculations';
 import { getTodayDateString, formatDisplayDate } from '@/lib/dateUtils';
+import { getAppEffectiveDate } from '@/lib/demoDate';
 import AbsurdInputDialog from './AbsurdInputDialog';
 import {
   PlusCircle,
@@ -35,7 +36,7 @@ export default function LogActivityModal({ isOpen, onClose, onSuccess }: LogActi
   useEffect(() => {
     if (isOpen) {
       setQuantity('');
-      setActivityDate(getTodayDateString());
+      setActivityDate(getAppEffectiveDate());
       setErrorMessage(null);
       setSuccessMessage(null);
       setShowAbsurdDialog(false);

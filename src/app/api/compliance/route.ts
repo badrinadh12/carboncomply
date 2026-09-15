@@ -6,7 +6,7 @@ import {
   computeMonthlyTravelAllowance,
   generateDeterministicInsights,
 } from '@/lib/complianceEngine';
-import { getTodayDateString } from '@/lib/dateUtils';
+import { getTodayDateString, getMonthInfo } from '@/lib/dateUtils';
 
 export async function GET(request: NextRequest) {
   try {
@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
     );
 
     const categories = computeCategoryBreakdown(currentWeekActivities);
-    const travelAllowance = computeMonthlyTravelAllowance(activities);
+    const travelAllowance = computeMonthlyTravelAllowance(activities, getMonthInfo(referenceDate).monthKey);
     const insights = generateDeterministicInsights(currentWeekSummary, categories, travelAllowance);
 
     // Aggregate statistics for Government Overview

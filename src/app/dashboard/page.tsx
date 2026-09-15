@@ -20,6 +20,7 @@ import {
 
 import ThresholdExceededToast from '@/components/ThresholdExceededToast';
 import { evaluateAndTriggerThresholdAlert } from '@/lib/notificationTracker';
+import { getAppEffectiveDate } from '@/lib/demoDate';
 
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
@@ -38,8 +39,9 @@ export default function DashboardPage() {
   const fetchDashboardData = useCallback(async (isUserAction: boolean = false) => {
     try {
       setLoading(true);
+      const effDate = getAppEffectiveDate();
       const [compRes, actsRes] = await Promise.all([
-        fetch('/api/compliance'),
+        fetch(`/api/compliance?date=${effDate}`),
         fetch('/api/activities'),
       ]);
 
@@ -80,10 +82,16 @@ export default function DashboardPage() {
   useEffect(() => {
     // Initial fetch on mount (not user action, avoids autoplay block or duplicate alert on refresh)
     fetchDashboardData(false);
+
+    const handleDateChanged = () => {
+      fetchDashboardData(false);
+    };
+    window.addEventListener('carboncomply_date_changed', handleDateChanged);
+    return () => window.removeEventListener('carboncomply_date_changed', handleDateChanged);
   }, [fetchDashboardData]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50">
+    <div className="min-h-screen flex flex-col bg-sage-canvas">
       <Header
         onQuickLog={() => setIsLogModalOpen(true)}
         onSeedDemo={fetchDashboardData}
