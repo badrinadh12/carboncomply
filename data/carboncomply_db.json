@@ -1,0 +1,190 @@
+{
+  "activities": [
+    {
+      "activity_type": "car",
+      "quantity": 10,
+      "unit": "km",
+      "emission_factor": 0.2,
+      "co2_kg": 2,
+      "activity_date": "2026-09-15",
+      "id": "act_1789458405680_xal5zgn",
+      "created_at": "2026-09-15T07:46:45.680Z"
+    },
+    {
+      "activity_type": "electricity",
+      "quantity": 50,
+      "unit": "kWh",
+      "emission_factor": 0.8,
+      "co2_kg": 40,
+      "activity_date": "2026-09-15",
+      "id": "act_1789458405720_gvw2kl2",
+      "created_at": "2026-09-15T07:46:45.721Z"
+    },
+    {
+      "activity_type": "non_veg_meal",
+      "quantity": 3,
+      "unit": "meals",
+      "emission_factor": 2,
+      "co2_kg": 6,
+      "activity_date": "2026-09-15",
+      "id": "act_1789458405767_9azu1g5",
+      "created_at": "2026-09-15T07:46:45.767Z"
+    },
+    {
+      "activity_type": "flight",
+      "quantity": 100,
+      "unit": "km",
+      "emission_factor": 0.25,
+      "co2_kg": 25,
+      "activity_date": "2026-09-16",
+      "id": "act_1789458405814_wq7h6mm",
+      "created_at": "2026-09-15T07:46:45.814Z"
+    },
+    {
+      "activity_type": "electricity",
+      "quantity": 40,
+      "unit": "kWh",
+      "emission_factor": 0.8,
+      "co2_kg": 32,
+      "activity_date": "2026-09-16",
+      "id": "act_1789458406491_r528uoq",
+      "created_at": "2026-09-15T07:46:46.491Z"
+    },
+    {
+      "activity_type": "car",
+      "quantity": 150,
+      "unit": "km",
+      "emission_factor": 0.2,
+      "co2_kg": 30,
+      "activity_date": "2026-09-22",
+      "id": "act_1789458406589_zfi8b18",
+      "created_at": "2026-09-15T07:46:46.589Z"
+    },
+    {
+      "activity_type": "flight",
+      "quantity": 480,
+      "unit": "km",
+      "emission_factor": 0.25,
+      "co2_kg": 120,
+      "activity_date": "2026-09-29",
+      "id": "act_1789458406667_bh44qtc",
+      "created_at": "2026-09-15T07:46:46.667Z"
+    },
+    {
+      "activity_type": "bus",
+      "quantity": 50,
+      "unit": "km",
+      "emission_factor": 0.08,
+      "co2_kg": 4,
+      "activity_date": "2026-09-14",
+      "id": "act_1789458406821_obtgtbq",
+      "created_at": "2026-09-15T07:46:46.821Z"
+    },
+    {
+      "activity_type": "flight",
+      "quantity": 360,
+      "unit": "km",
+      "emission_factor": 0.25,
+      "co2_kg": 90,
+      "activity_date": "2026-08-31",
+      "id": "act_1789458407725_f2e6xuc",
+      "created_at": "2026-09-15T07:46:47.725Z"
+    },
+    {
+      "activity_type": "electricity",
+      "quantity": 40,
+      "unit": "kWh",
+      "emission_factor": 0.8,
+      "co2_kg": 32,
+      "activity_date": "2026-09-01",
+      "id": "act_1789458407730_d1eoirq",
+      "created_at": "2026-09-15T07:46:47.730Z"
+    },
+    {
+      "activity_type": "car",
+      "quantity": 120,
+      "unit": "km",
+      "emission_factor": 0.2,
+      "co2_kg": 24,
+      "activity_date": "2026-09-07",
+      "id": "act_1789458407734_794n3p6",
+      "created_at": "2026-09-15T07:46:47.734Z"
+    },
+    {
+      "activity_type": "electricity",
+      "quantity": 50,
+      "unit": "kWh",
+      "emission_factor": 0.8,
+      "co2_kg": 40,
+      "activity_date": "2026-09-07",
+      "id": "act_1789458407736_0h4z4wb",
+      "created_at": "2026-09-15T07:46:47.736Z"
+    },
+    {
+      "activity_type": "car",
+      "quantity": 50,
+      "unit": "km",
+      "emission_factor": 0.2,
+      "co2_kg": 10,
+      "activity_date": "2026-09-14",
+      "id": "act_1789458407741_j0ixj8o",
+      "created_at": "2026-09-15T07:46:47.741Z"
+    },
+    {
+      "activity_type": "electricity",
+      "quantity": 45,
+      "unit": "kWh",
+      "emission_factor": 0.8,
+      "co2_kg": 36,
+      "activity_date": "2026-09-15",
+      "id": "act_1789458407747_td4xb9k",
+      "created_at": "2026-09-15T07:46:47.748Z"
+    },
+    {
+      "activity_type": "flight",
+      "quantity": 80,
+      "unit": "km",
+      "emission_factor": 0.25,
+      "co2_kg": 20,
+      "activity_date": "2026-09-15",
+      "id": "act_1789458407758_0hy5i2o",
+      "created_at": "2026-09-15T07:46:47.758Z"
+    },
+    {
+      "activity_type": "non_veg_meal",
+      "quantity": 2,
+      "unit": "meals",
+      "emission_factor": 2,
+      "co2_kg": 4,
+      "activity_date": "2026-09-15",
+      "id": "act_1789458407767_cf10xy1",
+      "created_at": "2026-09-15T07:46:47.767Z"
+    },
+    {
+      "activity_type": "veg_meal",
+      "quantity": 4,
+      "unit": "meals",
+      "emission_factor": 0.5,
+      "co2_kg": 2,
+      "activity_date": "2026-09-15",
+      "id": "act_1789458407776_pnl880x",
+      "created_at": "2026-09-15T07:46:47.776Z"
+    },
+    {
+      "activity_type": "car",
+      "quantity": 25,
+      "unit": "km",
+      "emission_factor": 0.2,
+      "co2_kg": 5,
+      "activity_date": "2026-09-15",
+      "id": "act_1789458950160_vt8zwbu",
+      "created_at": "2026-09-15T07:55:50.160Z"
+    }
+  ],
+  "settings": {
+    "id": "default",
+    "personal_weekly_target": 75,
+    "updated_at": "2026-09-15T07:46:47.375Z"
+  },
+  "compliance_weeks": []
+}
