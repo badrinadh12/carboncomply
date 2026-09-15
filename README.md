@@ -1,6 +1,5 @@
 ## Hackathon Details
-
-Portal        https://hackathon.azisly.ai/login  
+ 
 Email         badrinadhgoru@gmail.com  
 Hackathon ID  AZIS-NRKU3X  
 Team          Badrinadh's Team  
