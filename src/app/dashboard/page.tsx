@@ -18,6 +18,9 @@ import {
   UserSettings,
 } from '@/lib/types';
 
+import ThresholdExceededToast from '@/components/ThresholdExceededToast';
+import { evaluateAndTriggerThresholdAlert } from '@/lib/notificationTracker';
+
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [isLogModalOpen, setIsLogModalOpen] = useState(false);
@@ -28,7 +31,11 @@ export default function DashboardPage() {
   const [recentActivities, setRecentActivities] = useState<Activity[]>([]);
   const [userSettings, setUserSettings] = useState<UserSettings | null>(null);
 
-  const fetchDashboardData = useCallback(async () => {
+  // Toast notification state
+  const [toastOpen, setToastOpen] = useState(false);
+  const [toastTotal, setToastTotal] = useState(0);
+
+  const fetchDashboardData = useCallback(async (isUserAction: boolean = false) => {
     try {
       setLoading(true);
       const [compRes, actsRes] = await Promise.all([
@@ -39,12 +46,25 @@ export default function DashboardPage() {
       const compData = await compRes.json();
       const actsData = await actsRes.json();
 
-      if (compData.success) {
+      if (compData.success && compData.currentWeek) {
         setCurrentWeek(compData.currentWeek);
         setCategories(compData.categories || []);
         setTravelAllowance(compData.travelAllowance);
         setAllWeeks(compData.allWeeks || []);
         setUserSettings(compData.userSettings);
+
+        // Check if threshold was newly crossed and trigger sound + toast alert
+        if (isUserAction) {
+          evaluateAndTriggerThresholdAlert(
+            compData.currentWeek.totalCo2,
+            compData.currentWeek.weekStart,
+            (total) => {
+              setToastTotal(total);
+              setToastOpen(true);
+            },
+            true
+          );
+        }
       }
 
       if (actsData.success) {
@@ -58,7 +78,8 @@ export default function DashboardPage() {
   }, []);
 
   useEffect(() => {
-    fetchDashboardData();
+    // Initial fetch on mount (not user action, avoids autoplay block or duplicate alert on refresh)
+    fetchDashboardData(false);
   }, [fetchDashboardData]);
 
   return (
@@ -138,7 +159,14 @@ export default function DashboardPage() {
       <LogActivityModal
         isOpen={isLogModalOpen}
         onClose={() => setIsLogModalOpen(false)}
-        onSuccess={fetchDashboardData}
+        onSuccess={() => fetchDashboardData(true)}
+      />
+
+      {/* Threshold Exceeded In-App Toast Alert */}
+      <ThresholdExceededToast
+        isOpen={toastOpen}
+        totalCo2={toastTotal}
+        onClose={() => setToastOpen(false)}
       />
     </div>
   );

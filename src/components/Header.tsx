@@ -16,6 +16,7 @@ import {
   RotateCcw,
   Leaf,
 } from 'lucide-react';
+import { resetNotificationState } from '@/lib/notificationTracker';
 
 interface HeaderProps {
   onQuickLog?: () => void;
@@ -62,6 +63,7 @@ export default function Header({ onQuickLog, onSeedDemo, onResetData }: HeaderPr
     if (!confirm('Reset all citizen activity records to a fresh slate?')) return;
     setDemoActionLoading(true);
     try {
+      resetNotificationState();
       if (onResetData) {
         await onResetData();
       } else {

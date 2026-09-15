@@ -69,6 +69,36 @@
       "activity_date": "2026-09-15",
       "id": "act_1789462779086_p9thf70",
       "created_at": "2026-09-15T08:59:39.086Z"
+    },
+    {
+      "activity_type": "bus",
+      "quantity": 10,
+      "unit": "km",
+      "emission_factor": 0.08,
+      "co2_kg": 0.8,
+      "activity_date": "2026-09-15",
+      "id": "act_1789463489038_4q3lkvd",
+      "created_at": "2026-09-15T09:11:29.038Z"
+    },
+    {
+      "activity_type": "bus",
+      "quantity": 50,
+      "unit": "km",
+      "emission_factor": 0.08,
+      "co2_kg": 4,
+      "activity_date": "2026-09-15",
+      "id": "act_1789463512662_x0xlvqz",
+      "created_at": "2026-09-15T09:11:52.662Z"
+    },
+    {
+      "activity_type": "flight",
+      "quantity": 430,
+      "unit": "km",
+      "emission_factor": 0.25,
+      "co2_kg": 107.5,
+      "activity_date": "2026-09-15",
+      "id": "act_1789463559827_d27tncf",
+      "created_at": "2026-09-15T09:12:39.827Z"
     }
   ],
   "settings": {

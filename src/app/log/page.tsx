@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import { ActivityType, ActivityDefinition } from '@/lib/types';
 import { ACTIVITY_DEFINITIONS, calculateCo2, formatCo2, isAbsurdValue } from '@/lib/calculations';
 import { getTodayDateString, formatDisplayDate } from '@/lib/dateUtils';
+import { evaluateAndTriggerThresholdAlert } from '@/lib/notificationTracker';
 import AbsurdInputDialog from '@/components/AbsurdInputDialog';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -81,6 +82,20 @@ export default function LogActivityPage() {
       if (!res.ok || !data.success) {
         throw new Error(data.error || 'Failed to record activity.');
       }
+
+      // Check if this newly pushed the week over 100 kg to trigger notification sound
+      try {
+        const compRes = await fetch('/api/compliance');
+        const compData = await compRes.json();
+        if (compData.success && compData.currentWeek) {
+          evaluateAndTriggerThresholdAlert(
+            compData.currentWeek.totalCo2,
+            compData.currentWeek.weekStart,
+            () => {},
+            true
+          );
+        }
+      } catch (e) {}
 
       setSuccessMessage(
         `Recorded ${formatCo2(estimatedCo2)} kg CO₂ for ${formatDisplayDate(activityDate)}.`

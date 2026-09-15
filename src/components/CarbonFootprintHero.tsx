@@ -84,8 +84,11 @@ export default function CarbonFootprintHero({
 
           <div className="flex flex-wrap items-center gap-2.5 pt-0.5">
             <span
-              className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold border ${statusBadge.pill}`}
+              className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold border ${statusBadge.pill} ${
+                isExceeded ? 'ring-2 ring-rose-200/80 animate-pulse' : ''
+              }`}
             >
+              {isExceeded && <AlertTriangle className="w-3 h-3 mr-1 text-rose-700 shrink-0" />}
               {statusBadge.label}
             </span>
             <span className="text-xs text-slate-600 font-medium">
