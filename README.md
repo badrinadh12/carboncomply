@@ -1,9 +1,9 @@
 # CARBONCOMPLY
 > **Track. Reduce. Comply.**
 
-**Track 2 — Real-World AI Products**  
-**Hackathon Submission ID**: `[YOUR HACKATHON ID]`  
-**Prototype Type**: Citizen Carbon Footprint Tracking and Statutory Compliance Platform
+**Track 2: Real-World AI Products**  
+**Hackathon ID: AZIS-NRKU3X**  
+**Product**: CarbonComply — Citizen Carbon Footprint Tracking and Statutory Compliance Platform
 
 ---
 
@@ -257,8 +257,9 @@ Documented comprehensively in [DECISIONS.md](DECISIONS.md):
 
 ## 20. Hackathon Information
 
-- **Project**: CARBONCOMPLY
-- **Track**: Track 2 — Real-World AI Products
-- **Submission ID**: `[YOUR HACKATHON ID]`
+- **Product**: CarbonComply
+- **Track**: Track 2: Real-World AI Products
+- **Hackathon ID: AZIS-NRKU3X**
+- **Authentication**: Zero authentication required (direct open citizen access)
 - **Repository**: Public GitHub Repository Ready
 - **License**: MIT

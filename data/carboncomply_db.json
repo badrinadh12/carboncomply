@@ -79,6 +79,16 @@
       "activity_date": "2026-09-15",
       "id": "act_1789466995271_cr64992",
       "created_at": "2026-09-15T10:09:55.271Z"
+    },
+    {
+      "activity_type": "car",
+      "quantity": 50,
+      "unit": "km",
+      "emission_factor": 0.2,
+      "co2_kg": 10,
+      "activity_date": "2026-09-21",
+      "id": "act_1789467577332_xrh6xmy",
+      "created_at": "2026-09-15T10:19:37.332Z"
     }
   ],
   "settings": {
